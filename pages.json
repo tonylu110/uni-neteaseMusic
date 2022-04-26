@@ -1,0 +1,58 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				"navigationStyle": "custom"
+			}
+		}
+	    ,{
+            "path" : "pages/like/like",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/mine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#e00000",
+		"borderStyle": "white",
+		"backgroundColor": "#f8f8f8",
+		"height": "60px",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/tabbar/bilibili.png",
+			"selectedIconPath": "static/tabbar/bilibili_sel.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/like/like",
+			"iconPath": "static/tabbar/like.png",
+			"selectedIconPath": "static/tabbar/like_sel.png",
+			"text": "动态"
+		}, {
+			"pagePath": "pages/mine/mine",
+			"iconPath": "static/tabbar/mine.png",
+			"selectedIconPath": "static/tabbar/mine_sel.png",
+			"text": "我的"
+		}]
+	}
+}
