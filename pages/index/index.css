@@ -90,3 +90,25 @@ swiper{
 	width: 630rpx;
 	height: 250rpx;
 }
+
+.search_bar{
+	height: 80rpx;
+	width: 630rpx;
+	background-color: white;
+	margin-left: 30rpx;
+	margin-bottom: 30rpx;
+	border-radius: 40rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-left: 20rpx;
+}
+.search_area{
+	height: 110rpx;
+}
+.shearch_fixed{
+	position: fixed;
+	z-index: 22;
+	margin-left: 50rpx;
+	box-shadow: 0px 0px 20px #00000020;
+}

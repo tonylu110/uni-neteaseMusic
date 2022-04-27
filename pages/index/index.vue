@@ -5,8 +5,15 @@
 			{{ title }}
 		</view>
 		<scroll-view scroll-y="true" @scroll="scroll" enable-flex="true" :style="{height: screenHeight - systemBarHeight - rpx2px(100) - 60 + 'px'}">
+			<view class="search_bar shearch_fixed" :style="{top: systemBarHeight + rpx2px(140) + 'px'}" v-show="!searbarShow">
+				<uni-icons type="search" size="30" color="black"></uni-icons>
+			</view>
 			<view class="list_main">
 				<view class="list_title">首页</view>
+				<view class="search_bar" v-show="searbarShow">
+					<uni-icons type="search" size="30" color="black"></uni-icons>
+				</view>
+				<view class="search_area" v-show="!searbarShow"></view>
 				<swiper class="swiper-box" indicator-dots="true" autoplay="true" interval="3000">
 					<swiper-item v-for="(item ,index) in bannerList" :key="index">
 						<view class="swiper-item">
@@ -70,7 +77,8 @@
 				hightList: [],
 				bannerList: [],
 				albumList: [],
-				djprogram: []
+				djprogram: [],
+				searbarShow: true
 			}
 		},
 		onLoad() {
@@ -127,8 +135,10 @@
 			scroll(e) {
 				if (e.detail.scrollTop > 61) {
 					this.title = '首页'
+					this.searbarShow = false
 				} else {
 					this.title = ''
+					this.searbarShow = true
 				}
 				if (e.detail.scrollTop > 0) {
 					this.navShadowColor = '15'
