@@ -1,0 +1,123 @@
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	background-color: #f8f8f8;
+}
+.system_bar{
+	width: 750rpx;
+	background-color: white;
+	z-index: 11;
+	background-color: #f8f8f8;
+}
+.navigator_bar{
+	width: 650rpx;
+	height: 100rpx;
+	background-color: white;
+	font-size: 35rpx;
+	z-index: 10;
+	font-weight: bold;
+	background-color: #f8f8f8;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0px 50rpx 0px 50rpx; 
+	justify-content: space-between;
+}
+
+.list_main{
+	width: 710rpx;
+	padding: 20rpx;
+}
+.list_title{
+	font-weight: bold;
+	font-size: 40px;
+	margin-bottom: 20rpx;
+	margin-left: 40rpx;
+}
+.list_small_title{
+	font-size: 20px;
+	margin-left: 60rpx;
+}
+
+.search_bar{
+	width: 670rpx;
+	margin-left: 40rpx;
+	margin-bottom: 30rpx;
+}
+
+.allHW{
+	margin-top: 20rpx;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.allHisW{
+	max-height: 320rpx;
+	overflow: hidden;
+	margin-left: 60rpx;
+	margin-right: 60rpx;
+}
+.clear_btn{
+	width: 590rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 20rpx;
+	border-radius: 80rpx;
+	color: #aaa;
+	margin-left: 60rpx;
+}
+.clear_btn:active{
+	background-color: white;
+}
+.his_word{
+	margin-top: 30rpx;
+	margin-bottom: 40rpx;
+}
+.hotword{
+	background-color: white;
+	padding: 10rpx 15rpx 10rpx 15rpx;
+	border-radius: 10rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-right: 20rpx;
+	margin-bottom: 20rpx;
+	display: flex;
+	flex-direction: row;
+	height: 45rpx;
+	line-height: 45rpx;
+}
+
+.hot_main{
+	margin-top: 30rpx;
+	width: 570rpx;
+	height: 360rpx;
+	background-color: white;
+	margin-left: 60rpx;
+	border-radius: 30rpx;
+	padding: 10rpx 30rpx 10rpx 30rpx;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-bottom: 60rpx;
+}
+.words{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 285rpx;
+	height: 72rpx;
+	font-size: 30rpx;
+	font-weight: bold;
+}
+.words text{
+	margin-right: 10rpx;
+}
+.dj_words{
+	width: 570rpx;
+}

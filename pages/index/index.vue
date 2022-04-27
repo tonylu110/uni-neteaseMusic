@@ -5,12 +5,12 @@
 			{{ title }}
 		</view>
 		<scroll-view scroll-y="true" @scroll="scroll" enable-flex="true" :style="{height: screenHeight - systemBarHeight - rpx2px(100) - 60 + 'px'}">
-			<view class="search_bar shearch_fixed" :style="{top: systemBarHeight + rpx2px(140) + 'px'}" v-show="!searbarShow">
+			<view @click="toSearch()" class="search_bar shearch_fixed" :style="{top: systemBarHeight + rpx2px(140) + 'px'}" v-show="!searbarShow">
 				<uni-icons type="search" size="30" color="black"></uni-icons>
 			</view>
 			<view class="list_main">
 				<view class="list_title">首页</view>
-				<view class="search_bar" v-show="searbarShow">
+				<view @click="toSearch()" class="search_bar" v-show="searbarShow">
 					<uni-icons type="search" size="30" color="black"></uni-icons>
 				</view>
 				<view class="search_area" v-show="!searbarShow"></view>
@@ -130,6 +130,11 @@
 					success: (res) => {
 						this.bannerList = res.data.banners
 					}
+				})
+			},
+			toSearch() {
+				uni.navigateTo({
+					url: '../search/search'
 				})
 			},
 			scroll(e) {
