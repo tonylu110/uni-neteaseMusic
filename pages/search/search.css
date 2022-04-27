@@ -6,36 +6,15 @@
 	height: 100%;
 	background-color: #f8f8f8;
 }
-.system_bar{
-	width: 750rpx;
-	background-color: white;
-	z-index: 11;
-	background-color: #f8f8f8;
-}
-.navigator_bar{
-	width: 650rpx;
-	height: 100rpx;
-	background-color: white;
-	font-size: 35rpx;
-	z-index: 10;
-	font-weight: bold;
-	background-color: #f8f8f8;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	padding: 0px 50rpx 0px 50rpx; 
-	justify-content: space-between;
-}
 
 .list_main{
 	width: 710rpx;
-	padding: 20rpx;
 }
 .list_title{
 	font-weight: bold;
 	font-size: 40px;
 	margin-bottom: 20rpx;
-	margin-left: 40rpx;
+	margin-left: 60rpx;
 }
 .list_small_title{
 	font-size: 20px;

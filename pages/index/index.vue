@@ -1,9 +1,6 @@
 <template>
 	<view class="content">
-		<view class="system_bar" :style="{height: systemBarHeight + 'px'}"></view>
-		<view class="navigator_bar" :style="{boxShadow: '0px 0px 30px #000000' + navShadowColor}">
-			{{ title }}
-		</view>
+		<TitleBar :title="title" :navShadowColor="navShadowColor" :showBackButton="false"></TitleBar>
 		<scroll-view scroll-y="true" @scroll="scroll" enable-flex="true" :style="{height: screenHeight - systemBarHeight - rpx2px(100) - 60 + 'px'}">
 			<view @click="toSearch()" class="search_bar shearch_fixed" :style="{top: systemBarHeight + rpx2px(140) + 'px'}" v-show="!searbarShow">
 				<uni-icons type="search" size="30" color="black"></uni-icons>

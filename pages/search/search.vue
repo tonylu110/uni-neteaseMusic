@@ -1,46 +1,41 @@
 <template>
 	<view class="content">
-		<view class="system_bar" :style="{height: systemBarHeight + 'px'}"></view>
-		<view class="navigator_bar" :style="{boxShadow: '0px 0px 30px #000000' + navShadowColor}">
-			<uni-icons type="arrow-left" size="30" @click="back()"></uni-icons>
-			{{ title }}
-			<view class="" style="width: 30px;"></view>
-		</view>
+		<TitleBar :title="title" :navShadowColor="navShadowColor"></TitleBar>
 		<scroll-view scroll-y="true" @scroll="scroll" enable-flex="true" :style="{height: screenHeight - systemBarHeight - rpx2px(100) + 'px'}">
 			<view class="list_main">
 				<view class="list_title">搜索</view>
-			</view>
-			<view class="search_bar">
-				<uni-search-bar bgColor="white" v-model="searchValue" @confirm="search" radius="20" cancelButton="none" />
-			</view>
-			<view class="his_word" v-if="hisShow">
+				<view class="search_bar">
+					<uni-search-bar bgColor="white" v-model="searchValue" @confirm="search" radius="20" cancelButton="none" />
+				</view>
+				<view class="his_word" v-if="hisShow">
+					<view class="list_small_title">
+						历史记录：
+					</view>
+					<view :scroll-y="true" class="allHW allHisW">
+						<view class="hotword" v-for="(item,index) in keywords" :key="index">
+							{{ item }}
+						</view>
+					</view>
+					<view class="clear_btn" type="default" @click="clearHisword"><uni-icons type="trash" size="30" color="#aaa"></uni-icons>清除搜索历史</view>
+				</view>
 				<view class="list_small_title">
-					历史记录：
+					热搜榜：
 				</view>
-				<view :scroll-y="true" class="allHW allHisW">
-					<view class="hotword" v-for="(item,index) in keywords" :key="index">
-						{{ item }}
+				<view class="hot_main">
+					<view v-for="(item,index) in hotWords" :key="index">
+						<view class="words">
+							<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.first }}
+						</view>
 					</view>
 				</view>
-				<view class="clear_btn" type="default" @click="clearHisword"><uni-icons type="trash" size="30" color="#aaa"></uni-icons>清除搜索历史</view>
-			</view>
-			<view class="list_small_title">
-				热搜榜：
-			</view>
-			<view class="hot_main">
-				<view v-for="(item,index) in hotWords" :key="index">
-					<view class="words">
-						<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.first }}
-					</view>
+				<view class="list_small_title">
+					热门电台：
 				</view>
-			</view>
-			<view class="list_small_title">
-				热门电台：
-			</view>
-			<view class="hot_main">
-				<view v-for="(item,index) in djHot" :key="index">
-					<view class="words dj_words">
-						<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.name }}
+				<view class="hot_main">
+					<view v-for="(item,index) in djHot" :key="index">
+						<view class="words dj_words">
+							<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.name }}
+						</view>
 					</view>
 				</view>
 			</view>
