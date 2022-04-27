@@ -54,10 +54,12 @@
 		position: relative;
 		width: 750rpx;
 		background-color: white;
-		z-index: 1;
+		z-index: 11;
 		background-color: #f8f8f8;
 	}
 	.navigator_bar{
+		position: relative;
+		z-index: 10;
 		width: 650rpx;
 		height: 100rpx;
 		background-color: white;

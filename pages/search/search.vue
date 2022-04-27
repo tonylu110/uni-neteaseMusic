@@ -133,10 +133,8 @@
 			scroll(e) {
 				if (e.detail.scrollTop > 61) {
 					this.title = '搜索'
-					this.searbarShow = false
 				} else {
 					this.title = ''
-					this.searbarShow = true
 				}
 				if (e.detail.scrollTop > 0) {
 					this.navShadowColor = '15'
@@ -149,11 +147,6 @@
 			},
 			px2rpx(px) {
 				return px/(uni.upx2px(100)/100)
-			},
-			back() {
-				uni.navigateBack({
-					
-				})
 			}
 		}
 	}

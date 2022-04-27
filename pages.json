@@ -8,11 +8,12 @@
 			}
 		}
 	    ,{
-            "path" : "pages/like/like",
+            "path" : "pages/cate/cate",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
             }
             
         }
@@ -54,10 +55,10 @@
 			"selectedIconPath": "static/tabbar/bilibili_sel.png",
 			"text": "首页"
 		}, {
-			"pagePath": "pages/like/like",
+			"pagePath": "pages/cate/cate",
 			"iconPath": "static/tabbar/like.png",
 			"selectedIconPath": "static/tabbar/like_sel.png",
-			"text": "动态"
+			"text": "分类"
 		}, {
 			"pagePath": "pages/mine/mine",
 			"iconPath": "static/tabbar/mine.png",
