@@ -18,20 +18,20 @@
 					</view>
 					<view class="clear_btn" type="default" @click="clearHisword"><uni-icons type="trash" size="30" color="#aaa"></uni-icons>清除搜索历史</view>
 				</view>
-				<view class="list_small_title" v-show="networkIsWorking">
+				<view class="list_small_title">
 					热搜榜：
 				</view>
-				<view class="hot_main" v-show="networkIsWorking">
+				<view class="hot_main">
 					<view v-for="(item,index) in hotWords" :key="index">
 						<view class="words">
 							<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.first }}
 						</view>
 					</view>
 				</view>
-				<view class="list_small_title" v-show="networkIsWorking">
+				<view class="list_small_title">
 					热门电台：
 				</view>
-				<view class="hot_main" v-show="networkIsWorking">
+				<view class="hot_main">
 					<view v-for="(item,index) in djHot" :key="index">
 						<view class="words dj_words">
 							<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.name }}
@@ -78,6 +78,18 @@
 					this.hisShow = res.data
 				}
 			})
+			uni.getStorage({
+				key: 'hotWords',
+				success: (res) => {
+					this.hotWords = res.data
+				}
+			})
+			uni.getStorage({
+				key: 'djHot',
+				success: (res) => {
+					this.djHot = res.data
+				}
+			})
 			this.getHodWords()
 			this.getDjHot()
 		},
@@ -86,8 +98,20 @@
 				uni.request({
 					url: 'https://netease-cloud-music-api-eta-rust.vercel.app/search/hot',
 					success: (res) => {
-						this.hotWords = res.data.result.hots
-						this.networkIsWorking = true
+						var oldhotWords
+						uni.getStorage({
+							key: 'hotWords',
+							success: (res) => {
+								oldhotWords = res.data
+							}
+						})
+						uni.setStorage({
+							key: 'hotWords',
+							data: res.data.result.hots,
+						})
+						if (oldhotWords != res.data.result.hots) {
+							this.hotWords = res.data.result.hots
+						}
 					}
 				})
 			},
@@ -98,7 +122,20 @@
 						limit: '5'
 					},
 					success: (res) => {
-						this.djHot = res.data.djRadios
+						var oldDjHot
+						uni.getStorage({
+							key: 'djHot',
+							success: (res) => {
+								oldDjHot = res.data
+							}
+						})
+						uni.setStorage({
+							key: 'djHot',
+							data: res.data.djRadios,
+						})
+						if (oldDjHot != res.data.djRadios) {
+							this.djHot = res.data.djRadios
+						}
 					}
 				})
 			},
