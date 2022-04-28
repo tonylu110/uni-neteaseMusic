@@ -39,4 +39,15 @@
 	background-color: white;
 	margin: 20rpx;
 	border-radius: 20rpx;
+	height: 40rpx;
+}
+.dj_cate_list{
+	justify-content: flex-start;
+	padding: 30rpx;
+	width: 235rpx;
+}
+.cate_list image{
+	margin-right: 40rpx;
+	height: 40rpx;
+	width: 40rpx;
 }

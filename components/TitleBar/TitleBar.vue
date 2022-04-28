@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<view class="system_bar" :style="{height: systemBarHeight + 'px'}"></view>
-		<view class="navigator_bar" :style="{boxShadow: '0px 0px 30px #000000' + navShadowColor}">
-			<uni-icons type="arrow-left" size="30" @click="back()" v-if="showBackButton"></uni-icons>
+		<view class="system_bar" :style="{height: systemBarHeight + 'px', backgroundColor: bgColor}"></view>
+		<view class="navigator_bar" :style="{boxShadow: '0px 0px 30px #000000' + navShadowColor, backgroundColor: bgColor, color: fontColor}">
+			<uni-icons type="arrow-left" size="30" @click="back()" :color="fontColor" v-if="showBackButton"></uni-icons>
 			<view class="" style="width: 30px;" v-if="!showBackButton"></view>
 			{{ title }}
 			<view class="" style="width: 30px;"></view>
@@ -23,8 +23,16 @@
 				default: '标题'
 			},
 			navShadowColor: {
-				type:String,
+				type: String,
 				default: '00'
+			},
+			bgColor: {
+				type: String,
+				default: '#f8f8f8'
+			},
+			fontColor: {
+				type: String,
+				default: 'black'
 			}
 		},
 		data() {
@@ -55,7 +63,6 @@
 		width: 750rpx;
 		background-color: white;
 		z-index: 11;
-		background-color: #f8f8f8;
 	}
 	.navigator_bar{
 		position: relative;
@@ -65,7 +72,6 @@
 		background-color: white;
 		font-size: 35rpx;
 		font-weight: bold;
-		background-color: #f8f8f8;
 		display: flex;
 		flex-direction: row;
 		align-items: center;

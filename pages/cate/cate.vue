@@ -4,20 +4,20 @@
 		<scroll-view scroll-y="true" @scroll="scroll" :style="{height: screenHeight - systemBarHeight - rpx2px(100) - 60 + 'px'}">
 			<view class="list_main">
 				<view class="list_title">分类</view>
-				<view class="list_small_title">
+				<view class="list_small_title" v-show="networkIsWorking">
 					歌单分类：
 				</view>
-				<view class="cate_list_main">
+				<view class="cate_list_main" v-show="networkIsWorking">
 					<view class="cate_list" v-for="(item,index) in catList" :key="index">
 						{{ item.name }}
 					</view>
 				</view>
-				<view class="list_small_title">
+				<view class="list_small_title" v-show="networkIsWorking">
 					电台分类：
 				</view>
-				<view class="cate_list_main">
-					<view class="cate_list" v-for="(item,index) in djList" :key="index">
-						{{ item.name }}
+				<view class="cate_list_main" v-show="networkIsWorking">
+					<view class="cate_list dj_cate_list" v-for="(item,index) in djList" :key="index">
+						<image :src="item.pic84x84IdUrl" mode=""></image>  {{ item.name }}
 					</view>
 				</view>
 			</view>
@@ -34,7 +34,8 @@
 				navShadowColor: '00',
 				screenHeight: 0,
 				catList: [],
-				djList: []
+				djList: [],
+				networkIsWorking: false
 			}
 		},
 		onLoad() {
@@ -53,6 +54,7 @@
 					url: 'https://netease-cloud-music-api-eta-rust.vercel.app/dj/catelist',
 					success: (res) => {
 						this.djList = res.data.categories
+						this.networkIsWorking = true
 					}
 				})
 			},

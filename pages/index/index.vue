@@ -18,10 +18,10 @@
 						</view>
 					</swiper-item>
 				</swiper>
-				<view class="list_small_title">
+				<view class="list_small_title" v-show="networkIsWorking">
 					推荐歌单：
 				</view>
-				<scroll-view :scroll-x="true" class="highquality_lists_scroll">
+				<scroll-view :scroll-x="true" class="highquality_lists_scroll" v-show="networkIsWorking">
 					<view class="highquality_lists">
 						<view class="highquality_list" v-for="(item,index) in hightList" :key="index">
 							<image :src="item.picUrl" mode=""></image>
@@ -31,10 +31,10 @@
 						</view>
 					</view>
 				</scroll-view>
-				<view class="list_small_title">
+				<view class="list_small_title" v-show="networkIsWorking">
 					热门专辑：
 				</view>
-				<scroll-view :scroll-x="true" class="highquality_lists_scroll">
+				<scroll-view :scroll-x="true" class="highquality_lists_scroll" v-show="networkIsWorking">
 					<view class="highquality_lists">
 						<view class="highquality_list" v-for="(item,index) in albumList" :key="index">
 							<image :src="item.picUrl" mode=""></image>
@@ -44,10 +44,10 @@
 						</view>
 					</view>
 				</scroll-view>
-				<view class="list_small_title">
+				<view class="list_small_title" v-show="networkIsWorking">
 					热门电台：
 				</view>
-				<scroll-view :scroll-x="true" class="highquality_lists_scroll">
+				<scroll-view :scroll-x="true" class="highquality_lists_scroll" v-show="networkIsWorking">
 					<view class="highquality_lists">
 						<view class="highquality_list" v-for="(item,index) in djprogram" :key="index">
 							<image :src="item.picUrl" mode=""></image>
@@ -75,7 +75,8 @@
 				bannerList: [],
 				albumList: [],
 				djprogram: [],
-				searbarShow: true
+				searbarShow: true,
+				networkIsWorking: false
 			}
 		},
 		onLoad() {
@@ -126,6 +127,7 @@
 					},
 					success: (res) => {
 						this.bannerList = res.data.banners
+						this.networkIsWorking = true
 					}
 				})
 			},

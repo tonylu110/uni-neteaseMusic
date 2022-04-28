@@ -18,20 +18,20 @@
 					</view>
 					<view class="clear_btn" type="default" @click="clearHisword"><uni-icons type="trash" size="30" color="#aaa"></uni-icons>清除搜索历史</view>
 				</view>
-				<view class="list_small_title">
+				<view class="list_small_title" v-show="networkIsWorking">
 					热搜榜：
 				</view>
-				<view class="hot_main">
+				<view class="hot_main" v-show="networkIsWorking">
 					<view v-for="(item,index) in hotWords" :key="index">
 						<view class="words">
 							<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.first }}
 						</view>
 					</view>
 				</view>
-				<view class="list_small_title">
+				<view class="list_small_title" v-show="networkIsWorking">
 					热门电台：
 				</view>
-				<view class="hot_main">
+				<view class="hot_main" v-show="networkIsWorking">
 					<view v-for="(item,index) in djHot" :key="index">
 						<view class="words dj_words">
 							<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.name }}
@@ -54,6 +54,7 @@
 				keywords: [],
 				searchValue: '',
 				hisShow: false,
+				networkIsWorking: false,
 				hotWords: [],
 				djHot: []
 			}
@@ -86,6 +87,7 @@
 					url: 'https://netease-cloud-music-api-eta-rust.vercel.app/search/hot',
 					success: (res) => {
 						this.hotWords = res.data.result.hots
+						this.networkIsWorking = true
 					}
 				})
 			},
