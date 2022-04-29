@@ -157,6 +157,9 @@
 					data: true
 				})
 				this.hisShow = true
+				uni.navigateTo({
+					url: '../searchResult/searchResult?keyword=' + this.searchValue
+				})
 			},
 			clearHisword() {
 				uni.removeStorage({

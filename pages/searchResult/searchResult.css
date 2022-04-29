@@ -1,0 +1,48 @@
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	background-color: #f8f8f8;
+}
+
+.list_main{
+	width: 710rpx;
+}
+.list_title{
+	margin-top: 20rpx;
+	font-weight: bold;
+	font-size: 40px;
+	margin-bottom: 40rpx;
+	margin-left: 60rpx;
+	margin-right: 60rpx;
+}
+.music{
+	padding: 20rpx;
+	margin-left: 40rpx;
+	width: 630rpx;
+	background-color: white;
+	margin-bottom: 20rpx;
+	border-radius: 20rpx;
+	display: flex;
+	flex-direction: row;
+}
+.song_info{
+	width: 400rpx;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.song_name{
+	font-weight: bold;
+}
+.music image{
+	width: 200rpx;
+	height: 200rpx;
+	border-radius: 16rpx;
+	margin-right: 30rpx;
+}
+.ar_name{
+	font-weight: bold;
+}
