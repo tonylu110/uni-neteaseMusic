@@ -12,7 +12,7 @@
 						历史记录：
 					</view>
 					<view :scroll-y="true" class="allHW allHisW">
-						<view class="hotword" v-for="(item,index) in keywords" :key="index">
+						<view class="hotword" v-for="(item,index) in keywords" :key="index" @click="keywordToSearch(item)">
 							{{ item }}
 						</view>
 					</view>
@@ -23,7 +23,7 @@
 				</view>
 				<view class="hot_main">
 					<view v-for="(item,index) in hotWords" :key="index">
-						<view class="words">
+						<view class="words" @click="keywordToSearch(item.first)">
 							<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.first }}
 						</view>
 					</view>
@@ -33,7 +33,7 @@
 				</view>
 				<view class="hot_main">
 					<view v-for="(item,index) in djHot" :key="index">
-						<view class="words dj_words">
+						<view class="words dj_words" @click="keywordToSearch(item.name)">
 							<text :style="{color: (index < 3 ? 'red' : 'black')}">{{ index + 1 }}</text> {{ item.name }}
 						</view>
 					</view>
@@ -159,6 +159,28 @@
 				this.hisShow = true
 				uni.navigateTo({
 					url: '../searchResult/searchResult?keyword=' + this.searchValue
+				})
+			},
+			keywordToSearch(keyword) {
+				var keyword = keyword
+				var keywords = this.keywords
+				if (!keywords.includes(keyword)) {
+					this.keywords = [keyword, ...keywords]
+				} else {
+					keywords = keywords.filter(item => item != keyword)
+					this.keywords = [keyword, ...keywords]
+				}
+				uni.setStorage({
+					key: 'keywords',
+					data: this.keywords,
+				})
+				uni.setStorage({
+					key: 'hisWordShow',
+					data: true
+				})
+				this.hisShow = true
+				uni.navigateTo({
+					url: '../searchResult/searchResult?keyword=' + keyword
 				})
 			},
 			clearHisword() {
