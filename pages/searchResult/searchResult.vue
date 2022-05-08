@@ -1,7 +1,7 @@
 <template>
 	<view view class="content">
 		<TitleBar :title="title" :navShadowColor="navShadowColor"></TitleBar>
-		<scroll-view scroll-y="true" @scroll="scroll" enable-flex="true" :style="{height: screenHeight - systemBarHeight - rpx2px(100) + 'px'}">
+		<scroll-view scroll-y="true" @scroll="scroll" @scrolltolower="scrolltolower" enable-flex="true" :style="{height: screenHeight - systemBarHeight - rpx2px(100) + 'px'}">
 			<view class="list_main">
 				<view class="list_title">搜索：{{ searchKeyword }}</view>
 				<view class="music_list">
@@ -35,7 +35,8 @@
 				navShadowColor: '00',
 				screenHeight: 0,
 				searchKeyword: '',
-				searchList: []
+				searchList: [],
+				page: 1
 			}
 		},
 		onLoad(res) {
@@ -46,18 +47,26 @@
 				}
 			})
 			this.searchKeyword = res.keyword
-			uni.request({
-				url: 'https://netease-cloud-music-api-eta-rust.vercel.app/cloudsearch',
-				data: {
-					keywords: this.searchKeyword,
-					limit: '10'
-				},
-				success: (res) => {
-					this.searchList = res.data.result.songs
-				}
-			})
+			this.getSearchResult()
 		},
 		methods: {
+			scrolltolower(e) {
+				this.page = this.page + 1
+				this.getSearchResult()
+			},
+			getSearchResult() {
+				uni.request({
+					url: 'https://netease-cloud-music-api-eta-rust.vercel.app/cloudsearch',
+					data: {
+						keywords: this.searchKeyword,
+						limit: '10',
+						offset: (this.page-1)*10
+					},
+					success: (res) => {
+						this.searchList = [...this.searchList, ...res.data.result.songs]
+					}
+				})
+			},
 			scroll(e) {
 				if (e.detail.scrollTop > 61) {
 					this.title = this.searchKeyword
