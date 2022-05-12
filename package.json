@@ -1,0 +1,15 @@
+{
+    "id": "lizhili-audio",
+    "name": "audio音频播放组件",
+    "version": "1.0.1",
+    "description": "默认的audio 在苹果上不能使用了，自己写一个组件",
+    "keywords": [
+        "audio"
+    ],
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
+    }
+}

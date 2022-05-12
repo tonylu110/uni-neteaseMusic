@@ -46,3 +46,12 @@
 .ar_name{
 	font-weight: bold;
 }
+.music_player{
+	position: fixed;
+	bottom: 0;
+	height: 200rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}

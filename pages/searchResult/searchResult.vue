@@ -2,14 +2,14 @@
 	<view view class="content">
 		<TitleBar :title="title" :navShadowColor="navShadowColor"></TitleBar>
 		<scroll-view scroll-y="true" @scroll="scroll" @scrolltolower="scrolltolower" enable-flex="true" :style="{height: screenHeight - systemBarHeight - rpx2px(100) + 'px'}">
-			<view class="list_main">
+			<view class="list_main" :style="{marginBottom: music.show ? '200rpx' : ''}">
 				<view class="list_title">搜索：{{ searchKeyword }}</view>
 				<view class="music_list">
-					<view v-for="(item,index) in searchList" :key="index" class="music">
+					<view v-for="(item,index) in searchList" :key="index" class="music" @click="playMusic(item.id, item.al.picUrl, item.name, item.ar)">
 						<image :src="item.al.picUrl" mode=""></image>
 						<view class="song_info">
 							<view class="song_name">
-								{{ item.name }}
+								{{ item.name }} 
 							</view>
 							<view class="song_al_name">
 								{{ item.al.name }}<br/>
@@ -23,11 +23,18 @@
 				</view>
 			</view>
 		</scroll-view>
+		<view class="music_player" v-show="music.show">
+			<lizhili-audio :src='music.url' ref='lizhili' theme="white" :url='music.img' :name='music.name' :author='music.author' ></lizhili-audio>
+		</view>
 	</view>
 </template>
 
 <script>
+	import lizhiliAudio from '@/components/lizhili-audio/lizhili-audio.vue'
 	export default {
+		components: {
+			lizhiliAudio
+		},
 		data() {
 			return {
 				title: '',
@@ -36,7 +43,14 @@
 				screenHeight: 0,
 				searchKeyword: '',
 				searchList: [],
-				page: 1
+				page: 1,
+				music: {
+					url: '',
+					img: '',
+					name: '',
+					author: '',
+					show: false
+				}
 			}
 		},
 		onLoad(res) {
@@ -66,6 +80,22 @@
 						this.searchList = [...this.searchList, ...res.data.result.songs]
 					}
 				})
+			},
+			playMusic(id, img, name, author) {
+				this.music.show = true
+				this.music.url = 'https://music.163.com/song/media/outer/url?id=' + id + '.mp3'
+				this.music.img = img
+				this.music.name = name
+				if (this.music.show) {
+					this.music.author = ''
+					this.$refs.lizhili.stop()
+				}
+				if (this.music.author == '') {
+					for (var i = 0; i < author.length; i++) {
+						this.music.author = this.music.author + author[i].name + ' '
+					}
+				}
+				this.$refs.lizhili.bo()
 			},
 			scroll(e) {
 				if (e.detail.scrollTop > 61) {
