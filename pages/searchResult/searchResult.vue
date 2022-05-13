@@ -24,7 +24,7 @@
 			</view>
 		</scroll-view>
 		<view class="music_player" v-show="music.show">
-			<lizhili-audio :src='music.url' ref='lizhili' theme="white" :url='music.img' :name='music.name' :author='music.author' ></lizhili-audio>
+			<lizhili-audio :src='music.url' ref='lizhili' :isPlay="music.isPlay" theme="white" :url='music.img' :name='music.name' :author='music.author' ></lizhili-audio>
 		</view>
 	</view>
 </template>

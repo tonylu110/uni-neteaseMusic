@@ -60,7 +60,7 @@
 			</view>
 		</scroll-view>
 		<view class="music_player" v-show="music.show">
-			<lizhili-audio :src='music.url' ref='lizhili' theme="white" :url='music.img' :name='music.name' :author='music.author' ></lizhili-audio>
+			<lizhili-audio :src='music.url' ref='lizhili' :isPlay="music.isPlay" theme="white" :url='music.img' :name='music.name' :author='music.author' ></lizhili-audio>
 		</view>
 	</view>
 </template>
@@ -92,9 +92,11 @@
 					show: false,
 					isPlay: false,
 				},
+				firstLoad: true
 			}
 		},
 		onLoad() {
+			this.setMusic(true)
 			uni.getSystemInfo({
 				success: (res) => {
 					this.systemBarHeight = res.statusBarHeight
@@ -107,14 +109,33 @@
 			this.getDjprogram()
 		},
 		onShow() {
-			uni.getStorage({
-				key: 'music',
-				success: (res) => {
-					this.music = res.data
-				}
-			})
+			this.setMusic(false)
 		},
 		methods: {
+			setMusic(onload) {
+				uni.getStorage({
+					key: 'music',
+					success: (res) => {
+						if (onload) {
+							this.music.url = res.data.url
+							this.music.img = res.data.img
+							this.music.name = res.data.name
+							this.music.author = res.data.author
+							this.music.show = res.data.show
+							uni.setStorage({
+								key: 'music',
+								data: this.music
+							})
+						} else {
+							if (!this.firstLoad) {
+								this.music.isPlay = true
+							}
+							this.music = res.data
+							this.firstLoad = false
+						}
+					}
+				})
+			},
 			getHighQuality() {
 				uni.request({
 					url: this.getUrl + '/personalized',

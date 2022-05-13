@@ -31,6 +31,7 @@ export default {
 		src:{ type : String,  default : null},
 		theme:{ type : String,  default : 'black'},
 		heigh:{ type : Number,  default : 105},
+		isPlay:{ type : Boolean, dafault : false}
 	},
 	data() {
 		return {
@@ -50,16 +51,11 @@ export default {
 	    }
 	},
 	mounted() {
-		uni.getStorage({
-			key: 'music',
-			success: (res) => {
-				if(res.data.isPlay) {
-					this.is_fang = true
-				} else {
-					this.is_fang = false
-				}
-			}
-		})
+		if(this.isPlay) {
+			this.is_fang = true
+		} else {
+			this.is_fang = false
+		}
 		uni.getStorage({
 			key: 'musicTime',
 			success: (res) => {
