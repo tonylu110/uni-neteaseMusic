@@ -52,6 +52,7 @@ export default {
 	created() {
 		this.innerAudioContext=uni.createInnerAudioContext();
 		this.innerAudioContext.onPlay(() => {
+			this.time = 0
 			if(!this.intervalID){
 				this.intervalID=setInterval(()=>{
 					if(!this.is_pause){

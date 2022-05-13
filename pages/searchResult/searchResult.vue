@@ -60,6 +60,12 @@
 					this.screenHeight = res.screenHeight
 				}
 			})
+			uni.getStorage({
+				key: 'music',
+				success: (res) => {
+					this.music.show = res.data.show
+				}
+			})
 			this.searchKeyword = res.keyword
 			this.getSearchResult()
 		},
@@ -95,7 +101,13 @@
 						this.music.author = this.music.author + author[i].name + ' '
 					}
 				}
-				this.$refs.lizhili.bo()
+				uni.setStorage({
+					key: 'music',
+					data: this.music,
+				})
+				setTimeout(() => {
+					this.$refs.lizhili.bo()
+				}, 1)
 			},
 			scroll(e) {
 				if (e.detail.scrollTop > 61) {

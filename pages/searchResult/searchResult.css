@@ -28,6 +28,9 @@
 	display: flex;
 	flex-direction: row;
 }
+.music:active{
+	background-color: #eee;
+}
 .song_info{
 	width: 400rpx;
 	display: flex;
