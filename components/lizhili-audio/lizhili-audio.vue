@@ -14,9 +14,9 @@
 						{{author}}
 					</view>
 				</view>
-				<view class="time">
+				<!-- <view class="time">
 					{{time_str}}
-				</view>
+				</view> -->
 			</view>
 		</view>
 </template>
@@ -49,14 +49,37 @@ export default {
 			this.time_str=(fen >=10 ? fen : '0'+fen)+':'+(miao >=10 ? miao : '0'+miao)
 	    }
 	},
+	mounted() {
+		uni.getStorage({
+			key: 'music',
+			success: (res) => {
+				if(res.data.isPlay) {
+					this.is_fang = true
+				} else {
+					this.is_fang = false
+				}
+			}
+		})
+		uni.getStorage({
+			key: 'musicTime',
+			success: (res) => {
+				this.time = res.data
+			}
+		})
+	},
 	created() {
 		this.innerAudioContext=uni.createInnerAudioContext();
+		uni.$emit('innerAudioContext', this.innerAudioContext)
 		this.innerAudioContext.onPlay(() => {
 			this.time = 0
 			if(!this.intervalID){
 				this.intervalID=setInterval(()=>{
 					if(!this.is_pause){
 						this.time++
+						uni.setStorage({
+							key: 'musicTime',
+							data: this.time,
+						})
 					}
 				},1000)
 			}
@@ -98,6 +121,8 @@ export default {
 		ting(){
 			console.log('暂停播放');
 			this.innerAudioContext.pause()
+			this.is_fang = false
+			this.is_pause = true
 		},
 		stop(){
 			console.log(777);

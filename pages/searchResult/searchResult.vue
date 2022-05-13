@@ -49,8 +49,10 @@
 					img: '',
 					name: '',
 					author: '',
-					show: false
-				}
+					show: false,
+					isPlay: false,
+				},
+				innerAudioContext: null
 			}
 		},
 		onLoad(res) {
@@ -63,11 +65,14 @@
 			uni.getStorage({
 				key: 'music',
 				success: (res) => {
-					this.music.show = res.data.show
+					this.music = res.data
 				}
 			})
 			this.searchKeyword = res.keyword
 			this.getSearchResult()
+			uni.$on('innerAudioContext',(data)=>{
+				this.innerAudioContext = data
+			})
 		},
 		methods: {
 			scrolltolower(e) {
@@ -89,12 +94,13 @@
 			},
 			playMusic(id, img, name, author) {
 				this.music.show = true
+				this.music.isPlay = true
 				this.music.url = 'https://music.163.com/song/media/outer/url?id=' + id + '.mp3'
 				this.music.img = img
 				this.music.name = name
 				if (this.music.show) {
 					this.music.author = ''
-					this.$refs.lizhili.stop()
+					this.innerAudioContext.onEnded()
 				}
 				if (this.music.author == '') {
 					for (var i = 0; i < author.length; i++) {

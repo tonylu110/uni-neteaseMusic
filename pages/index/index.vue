@@ -5,7 +5,7 @@
 			<view @click="toSearch()" class="search_bar shearch_fixed" :style="{top: systemBarHeight + rpx2px(140) + 'px'}" v-show="!searbarShow">
 				<uni-icons type="search" size="30" color="black"></uni-icons>
 			</view>
-			<view class="list_main">
+			<view class="list_main" :style="{marginBottom: music.show ? '170rpx' : ''}">
 				<view class="list_title">首页</view>
 				<view @click="toSearch()" class="search_bar" v-show="searbarShow">
 					<uni-icons type="search" size="30" color="black"></uni-icons>
@@ -59,11 +59,18 @@
 				</scroll-view>
 			</view>
 		</scroll-view>
+		<view class="music_player" v-show="music.show">
+			<lizhili-audio :src='music.url' ref='lizhili' theme="white" :url='music.img' :name='music.name' :author='music.author' ></lizhili-audio>
+		</view>
 	</view>
 </template>
 
 <script>
+	import lizhiliAudio from '@/components/lizhili-audio/lizhili-audio.vue'
 	export default {
+		components: {
+			lizhiliAudio
+		},
 		data() {
 			return {
 				getUrl: 'https://netease-cloud-music-api-eta-rust.vercel.app',
@@ -76,7 +83,15 @@
 				albumList: [],
 				djprogram: [],
 				searbarShow: true,
-				networkIsWorking: false
+				networkIsWorking: false,
+				music: {
+					url: '',
+					img: '',
+					name: '',
+					author: '',
+					show: false,
+					isPlay: false,
+				},
 			}
 		},
 		onLoad() {
@@ -90,6 +105,14 @@
 			this.getBanners()
 			this.getAlbum()
 			this.getDjprogram()
+		},
+		onShow() {
+			uni.getStorage({
+				key: 'music',
+				success: (res) => {
+					this.music = res.data
+				}
+			})
 		},
 		methods: {
 			getHighQuality() {
